@@ -44,3 +44,9 @@ Best to give it an initial value of an empty array:
 ```
 let ninjas: string[] = [];
 ```
+
+## Tutorial 6 Notes
+
+`any` basically reverts back to the typeless JavaScript, so think twice about using it, as it gets rid of the benefits of TypeScript.
+
+However, it can be useful in certain situations.
