@@ -23,3 +23,24 @@ If you want the generated JavaScript to have the same name as the TypeScript, ju
 To do automatic compiling on TypeScript file saves:
 
 `tsc sandbox.ts -w`
+
+## Tutorial 5 Notes
+If you declare an array but don't give it in initial value, you can't then push to it.
+
+```
+let ninjas: string[];
+ninjas.push('shaun');
+```
+
+This won't report an error in the IDE and the JavaScript will be generated, but you'll see this in the browser console:
+
+```
+sandbox.js:11 Uncaught TypeError: Cannot read property 'push' of undefined
+    at sandbox.js:11
+```
+
+Best to give it an initial value of an empty array:
+
+```
+let ninjas: string[] = [];
+```
