@@ -50,3 +50,33 @@ let ninjas: string[] = [];
 `any` basically reverts back to the typeless JavaScript, so think twice about using it, as it gets rid of the benefits of TypeScript.
 
 However, it can be useful in certain situations.
+
+## Tutorial 7 Notes
+A better way of organising files is to have a `public` folder that will be deployed to a server.
+
+And a `src` folder that will be the TypeScript which we won't deploy - it'll be converted to JavaScript under `public`.
+
+`tsc` won't work well with a new folder structure so create some `tsconfig` instead.
+
+To initialise a `tsconfig.json` file, use:
+
+```
+tsc --init
+```
+
+If we set these items in `tsconfig`, we're telling `tsc` where the source is and where to save the output.
+
+```
+    "outDir": "./public",   
+    "rootDir": "./src",  
+```
+
+Running `tsc -w` will watch for file changes and generate JavaScript in `public` from our TypeScript in `src`.
+
+If you create a `.ts` file in the root folder, `tsc` will see it and create a corresponding `.js` file in `public`. We set `rootDir` config item to `./src`, but it is still looking outside that folder and finding our new `.ts` file. We want to restrict it to just `src`.
+
+To do this, add the following onto the end of `tsconfig.json`.
+
+```
+  "include": ["src"]
+```  
