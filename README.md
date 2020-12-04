@@ -80,3 +80,12 @@ To do this, add the following onto the end of `tsconfig.json`.
 ```
   "include": ["src"]
 ```  
+
+## Tutorial 8 Notes
+Functions return types are inferred so you don't have to add a return type.
+
+However, it makes things more readable.
+
+If a function doesn't return anything, then the inferred return type is `void`, which signifies a lack of return value.
+
+In JavaScript, `void` becomes `undefined`.
