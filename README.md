@@ -217,3 +217,21 @@ Net Ninja video course on this is here: https://www.youtube.com/watch?v=sOUhEJeJ
 ## Tutorial 15 Notes
 
 For an object to comply to an interface, it must have all the fields and methods. It cannot have extra ones.
+
+# Tutorial 17 Notes
+
+This tutorial adds HTML when a new invoice/payment is added.
+
+Makes use of `document.createElement()` to build up HTML.
+
+There's already a `ul` with class `item-list` in the HTML:
+
+```
+<ul class="item-list">
+```
+
+This is where new items will be displayed
+
+The `ul` is selected with `querySelector` and passed to a new instance of a class that has a `render` method. This takes an invoice or payment object and creates `li` elements to add to the `ul`.
+
+`render` is called when a form is submitted.
