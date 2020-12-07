@@ -174,3 +174,42 @@ if(anchor){
  ```
 
  This will only work if you use access modifiers on the parameters.
+
+ ## Tutorial 14 Notes
+The ES6 module system lets us import code from other files.
+
+To use the ES6 module system, we need to compile down to a version of JavaScript that modern browsers will understand.
+
+In `tsconfig`, if we set `"module": "es2015",`, this tells TypeScript to use the regular 2015 ECMAScript specification for modules, i.e. the regular JavaScript version.
+
+`"target": "es6",` changes the output to ECMAScript6 which targets modern browsers.
+
+In the HTML link to the JS file, add `type="module"` to tell the browser we're using modules, e.g.
+
+```
+<script type="module" src='app.js'></script>
+```
+
+Export what you want to use in another file using `export`, e.g.
+
+```
+export class Invoice {
+    ...
+}
+```
+
+`import` in another file:
+
+```
+import { Invoice } from './classes/Invoice.js';
+```
+
+Drawbacks to the module system
+
+* Older browsers don't support it
+* If you have multiple TypeScript files, you will have the same number of JavaScript files, so each file will need to go over the network.
+
+If we had WebPack this could squash the files into a single file and support older browsers.
+
+Net Ninja video course on this is here: https://www.youtube.com/watch?v=sOUhEJeJ-kI
+
