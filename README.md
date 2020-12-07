@@ -213,3 +213,7 @@ If we had WebPack this could squash the files into a single file and support old
 
 Net Ninja video course on this is here: https://www.youtube.com/watch?v=sOUhEJeJ-kI
 
+
+## Tutorial 15 Notes
+
+For an object to comply to an interface, it must have all the fields and methods. It cannot have extra ones.
