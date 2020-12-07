@@ -4,6 +4,8 @@ This is me working through the TypeScript tutorials at https://www.youtube.com/w
 
 Source code: https://github.com/iamshaunjp/typescript-tutorial
 
+ > General JavaScript note: When selecting by class, prefix with `.` e.g. `document.querySelector('.new-item-form')`. When selecting by ID, prefix with `#` e.g. `document.querySelector('#type')`.
+ 
 ## Tutorial 1 Notes
 
 Install Node to get npm.
@@ -89,3 +91,56 @@ However, it makes things more readable.
 If a function doesn't return anything, then the inferred return type is `void`, which signifies a lack of return value.
 
 In JavaScript, `void` becomes `undefined`.
+
+## Tutorial 11 Notes
+When selecting HTML elements, TypeScript doesn't know at design time whether the element actually exists. It has no view of the DOM at design time.
+
+So for safety we can check if a selected element exists in an IF statement, e.g.
+
+```
+const anchor = document.querySelector('a');
+if(anchor){
+    console.log(anchor.href);    
+}
+ ```
+
+ If you're sure the element exists, add `!` at the end of the selector line. This is saying I am sure the element exists, so don't show a warning.
+
+ TypeScript has its own types for DOM elements so offers IntelliSense for all the fields on an element. But this only works if you use an HTML element like `a` or `form` in the `querySelector`.
+
+ If you select an element using a class, TypeScript does not offer IntelliSense because the class could be applied to any HTML element and TypeScript doesn't know what it is. For instance, all you get from the following code is `Element`, rather than `HTMLAnchorElement` or `HTMLFormElement`.
+
+ ```
+ const form = document.querySelector('.new-item-form')!;
+ ```
+
+ To get round this, use:
+
+ ```
+ const form = document.querySelector('.new-item-form') as HTMLFormElement;
+ ```
+
+ This casts the returned element to the specified type. Note the `!` has been removed.
+
+ To add an event to an element, do this:
+
+ ```
+ form.addEventListener('submit', (e: Event) => {
+    e.preventDefault();
+
+   // do something
+})
+```
+
+ It's almost the same to how it's done in JavaScript, except the `e` event is of type `Event`. `e.preventDefault()` stops the default event behaviour so we can define our own.
+
+ By default, numbers in input field are turned into strings by JavaScript. To make it a number, use `valueAsNumber` as opposed to `value` in TypeScript:
+
+ ```
+    console.log(
+        type.value,
+        tofrom.value,
+        details.value,
+        amount.valueAsNumber
+    )
+ ```
