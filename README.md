@@ -144,3 +144,33 @@ if(anchor){
         amount.valueAsNumber
     )
  ```
+
+ ## Tutorial 13 Notes
+
+ By default all properties on classes are `public`.
+
+ Prefix fields with `private` to stop them being modified from outside the class.
+
+ Prefix with `readonly` to stop the field being modified from both outside and inside the class.
+
+ A better way of defining fields in a class is to do so in the constructor.
+
+ So this:
+
+ ```
+    readonly client: string;
+    private details: string;
+    public amount: number;
+ ```
+
+ Can be deleted and the constructor changed to this:
+
+ ```
+    constructor(
+        readonly client: string,
+        private details: string,
+        public amount: number,
+    ) { }
+ ```
+
+ This will only work if you use access modifiers on the parameters.
