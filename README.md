@@ -235,3 +235,86 @@ This is where new items will be displayed
 The `ul` is selected with `querySelector` and passed to a new instance of a class that has a `render` method. This takes an invoice or payment object and creates `li` elements to add to the `ul`.
 
 `render` is called when a form is submitted.
+
+# Tutorial 18 Notes
+
+## Generics
+
+```
+const addUID = <T>(obj: T) => {
+    let uid = Math.floor(Math.random() * 100);
+    return { ...obj, uid };
+}
+
+let docOne = addUID({ name: 'yoshi', age: 40 });
+console.log(docOne.name);
+```
+
+Adding `<T>` will record the object passed into `addUID` so that it knows what fields are on it. This means we get IntelliSense for `docOne`'s fields.
+
+At the moment `addUID` takes any type, so you could do:
+
+```
+let docTwo = addUID('myname');
+```
+
+This would add the `uid` field onto a string, which doesn't make any sense. It only makes sense if we pass an object. To enforce this, add `extends object`:
+
+```
+const addUID = <T extends object>(obj: T) => {
+    let uid = Math.floor(Math.random() * 100);
+    return { ...obj, uid };
+}
+```
+
+This stops us passing anything other than an `object` to `addUID`.
+
+We can be more specific on the type of object, e.g
+
+```
+const addUID = <T extends {name: string}>(obj: T) => {
+```
+
+So the passed object must have a `name` field of type `string`. It can also have other fields, but the minimum requirement is the `name: string` field specified.
+
+## Generics in Interfaces
+
+If you don't know the type of a field in the interface because it could be any number of things, you can use generics.
+
+```
+interface Resource<T> {
+    uid: number;
+    resourceName: string;
+    data: T;
+}
+```
+
+This lets you decide the type of the `data` field when you create an object of type `Resource`:
+
+```
+const docThree: Resource<string> = {
+    uid: 1,
+    resourceName: 'person',
+    data: 'shaun'
+}
+```
+
+or
+
+```
+const docFour: Resource<{ name: string }> = {
+    uid: 1,
+    resourceName: 'person',
+    data: { name: 'shaun' }
+}
+```
+
+or
+
+```
+const docFour: Resource<string[]> = {
+    uid: 1,
+    resourceName: 'person',
+    data: ['bread', 'milk', 'toilet roll']
+}
+```
