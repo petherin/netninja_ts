@@ -318,3 +318,52 @@ const docFour: Resource<string[]> = {
     data: ['bread', 'milk', 'toilet roll']
 }
 ```
+
+# Tutorial 20 Notes
+
+Tuples
+
+As a reminder (and because I forgot to add notes for tutorial 4 - Objects and Arrays), if you initialise an array in TypeScript with different types, then you can put any of those types in any index position later on.
+
+```
+let arr = ['ryu', 25, true];
+```
+
+This lets you add strings, numbers and booleans in any position later on.
+
+```
+arr[0] = false;
+arr[1] = 'yoshi';
+arr = [30, false, 'yoshi'];
+```
+
+Tuples are different. You define the types of each position in the tuple and you can't change the type in that position later.
+
+```
+let tup: [string, number, boolean] = ['ryu', 25, true];
+```
+
+You can't set index 0 to be anything other than a string later on. It locks in the type per position, meaning you know what type to expect when working with the tuple/array later.
+
+This is handy because we can use a tuple to pass data into a function that expects certain types for its parameters.
+
+```
+export class Invoice implements HasFormatter {
+    constructor(
+        readonly client: string,
+        private details: string,
+        public amount: number,
+    ) { }
+```
+
+When we call `new Invoice(` it expects a string, string and number.
+
+So we can pass it a tuple with those types:
+
+```
+let values:[string, string, number];
+values = [tofrom.value, details.value, amount.valueAsNumber ];
+doc = new Invoice(...values);
+```
+
+The `...` spread operator takes each value from the tuple/array and assigns it to each parameter in the function.
